@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bapatla Internal Marks Calculator</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+    <!-- 🔥 FUTURISTIC BACKGROUND LAYERS (correct position) -->
+     <canvas id="tech-bg"></canvas>
+    <div class="bg-hex"></div>
+    <div class="bg-lines"></div>
+    <div class="bg-glow"></div>
+    <div class="bg-holo"></div>
+    <div class="bg-matrix"></div>
+    <div class="bg-particles-2"></div>
+    <div class="bg-grid"></div>
+
+
+
+    <div class="container">
+        <div class="logo-wrap">
+            <div class="logo-circle">
+                <img src="logo.png" class="logo" alt="College Logo" />
+            </div>        
+            <h1 class="clg-name">BAPATLA ENGINEERING COLLEGE</h1>
+        </div>
+
+        <h4>R20 Internal Marks Calculator</h4>
+
+        <div class="marks-grid">
+
+            <div class="box">
+                <label>AAT - 1 </label>
+                <input id="aat1" type="number" inputmode="numeric" placeholder=" Enter 0 - 10" />
+                <div id="err1" class="error">Please Enter value 0 - 10</div>
+            </div>
+
+            <div class="box">
+                <label>AAT - 2 </label>
+                <input id="aat2" type="number" inputmode="numeric" placeholder=" Enter 0 - 10" />
+                <div id="err2" class="error">Please Enter value 0 - 10</div>
+            </div>
+
+            <div class="box">
+                <label>MID - 1 </label>
+                <input id="mid1" type="number" inputmode="numeric" placeholder=" Enter 0 - 35" />
+                <div id="err3" class="error">Please Enter value 0 - 35</div>
+            </div>
+
+            <div class="box">
+                <label>MID - 2 </label>
+                <input id="mid2" type="number" inputmode="numeric" placeholder=" Enter 0 - 35" />
+                <div id="err4" class="error">Please Enter value 0 - 35</div>
+            </div>
+
+        </div>
+
+    <button onclick="calculate()">CALCULATE</button>
+
+    <div class="result" id="result"></div>
+</div>
+
+<footer>
+    Developed by C15_PROJECT BATCH@2022-2026. All rights reserved.
+</footer>
+
+<script src="index.js"></script>
+</body>
+
+</html>

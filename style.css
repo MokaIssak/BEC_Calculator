@@ -1,0 +1,604 @@
+/* styles.css */
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+  
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    color: #e6f1ff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.header {
+    --logo-size: 72px; /* reduced logo size for a smaller, static header logo */
+}
+.header {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 18px 20px;
+    background: rgba(0, 18, 45, 0.45);
+    box-shadow: 0 0 18px rgba(0, 120, 255, 0.15);
+    position: relative;
+    overflow: hidden;
+    animation: slideIn 1.2s ease-out;
+}
+
+.header::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(0,140,255,0.12), rgba(120,0,255,0.08), rgba(0,255,200,0.06));
+    background-size: 200% 200%;
+    animation: gradientShift 6s linear infinite;
+    pointer-events: none;
+}
+
+.logo-wrap {
+    display: flex;
+    align-items: center;
+    gap: calc(var(--logo-size) * 0.20);
+    z-index: 1; /* keep above the pseudo layer */
+}
+@keyframes slideIn {
+    from { transform: translateY(-80px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+.logo {
+    width: calc(var(--logo-size) * 0.85);
+    height: calc(var(--logo-size) * 0.85);
+    filter: drop-shadow(0 0 calc(var(--logo-size) * 0.08) rgba(0,200,255,0.28));
+    transform-origin: center;
+    /* static logo: no float animation */
+    animation: none;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.logo-circle {
+    width: var(--logo-size);
+    height: var(--logo-size);
+    border-radius: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.04), rgba(0,0,0,0.12));
+    box-shadow: 0 0 calc(var(--logo-size) * 0.19) rgba(0,170,255,0.08), inset 0 1px 0 rgba(255,255,255,0.02);
+}
+
+.logo-circle::after {
+    /* ring/background removed to keep logo visually static */
+    display: none;
+}
+
+.logo-circle > .logo {
+    z-index: 1;
+}
+.clg-name {
+    /* scale header text to logo size while remaining responsive */
+    font-weight: 600;
+    color: #79cfff;
+    background: linear-gradient(90deg, #7be7ff, #b18cff, #9effa6);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    /* reduced size: keep proportional to logo but smaller for a cleaner header */
+    font-size: clamp(17px, calc(var(--logo-size) * 0.40), 50px);
+    letter-spacing: 0.1px;
+    animation: gradientText 4s linear infinite, neonGlow 2s ease-in-out infinite alternate;
+}
+@keyframes glowText {
+    from { text-shadow: 0 0 5px #00ccff; }
+    to { text-shadow: 0 0 15px #00eaff; }
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* float animation removed for static logo */
+
+@keyframes gradientText {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes neonGlow {
+    from { text-shadow: 0 0 6px rgba(0,200,255,0.6); }
+    to { text-shadow: 0 0 20px rgba(120,100,255,0.9); }
+}
+
+/* rotation animation removed */
+.container {
+    width: 350px;
+    padding: 25px;
+    margin-top: 40px;
+    border-radius: 15px;
+    background: rgba(0, 15, 40, 0.8);
+    box-shadow: 0 0 20px #0099ff;
+}
+label {
+    display: block;
+    margin-top: 18px;
+    margin-bottom: 6px;
+}
+input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #00aaff;
+    background: #031027;
+    color: white;
+    margin-top: 6px;
+    margin-bottom: 6px;
+}
+input:focus {
+    border-color: #00eaff;
+    box-shadow: 0 0 10px #00ccff;
+}
+/* invalid input highlight */
+.invalid {
+    border-color: #ff4d4d !important;
+    box-shadow: 0 0 8px rgba(255, 77, 77, 0.35) !important;
+}
+button {
+    width: 100%;
+    margin-top: 20px;
+    padding: 12px;
+    background: #0099ff;
+    border: none;
+    color: white;
+    font-size: 18px;
+    border-radius: 8px;
+}
+button:hover {
+    background: #00c8ff;
+    box-shadow: 0 0 15px #00d9ff;
+}
+.error {
+    color: #ff4d4d;
+    font-size: 12px;
+    display: none;
+    margin-top: 6px;
+    margin-bottom: 8px;
+}
+.result {
+    margin-top: 20px;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+}
+/* --------------------------
+   2-COLUMN GRID INPUT LAYOUT
+--------------------------- */
+.marks-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px 22px;
+    margin-top: 15px;
+}
+
+/* Each input block */
+.box {
+    background: rgba(0, 25, 60, 0.35);
+    padding: 12px 14px;
+    border-radius: 12px;
+    position: relative;
+    box-shadow: 0 0 12px rgba(0, 180, 255, 0.15);
+    transition: 0.3s ease;
+}
+
+/* Hover neon effect */
+.box:hover {
+    box-shadow: 0 0 18px rgba(0, 200, 255, 0.45);
+    transform: translateY(-2px);
+}
+
+/* --------------------------
+   NEON BACKGROUND EFFECT
+--------------------------- */
+.container {
+    position: relative;
+    overflow: hidden;
+}
+
+/* animated neon lines floating behind container */
+.container::before,
+.container::after {
+    content: "";
+    position: absolute;
+    width: 180%;
+    height: 180%;
+    background: radial-gradient(
+        circle,
+        rgba(0, 140, 255, 0.08),
+        rgba(0, 0, 40, 0.5)
+    );
+    animation: floatBg 12s ease-in-out infinite alternate;
+    z-index: -1;
+}
+
+.container::after {
+    animation-duration: 18s;
+    background: radial-gradient(
+        circle,
+        rgba(0, 255, 200, 0.06),
+        rgba(0, 0, 0, 0.3)
+    );
+}
+
+@keyframes floatBg {
+    0% { transform: translate(-15%, -10%) scale(1.1); }
+    100% { transform: translate(5%, 10%) scale(1.2); }
+}
+
+/* --------------------------
+   ANIMATED BORDER GLOW
+--------------------------- */
+.container {
+    border: 1.5px solid rgba(0, 150, 255, 0.35);
+    box-shadow: 0 0 18px rgba(0, 150, 255, 0.35);
+    animation: neonBorder 3s ease-in-out infinite alternate;
+}
+
+/* Smaller logo and college name inside container */
+.container .logo-wrap {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.container .logo-wrap .logo-circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 20%;
+    background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.04), rgba(0,0,0,0.12));
+    box-shadow: 0 0 7px rgba(0,170,255,0.08), inset 0 1px 0 rgba(255,255,255,0.02);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container .logo-wrap .logo {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+
+.container .logo-wrap .clg-name {
+    font-weight: 600;
+    font-size: 17.5px;
+    color: #79cfff;
+    background: linear-gradient(90deg, #7be7ff, #b18cff, #9effa6);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    letter-spacing: 0.05px;
+    animation: gradientText 4s linear infinite, neonGlow 2s ease-in-out infinite alternate;
+}
+/* Center everything inside each grid box */
+.box {
+    text-align: center;        /* Centers label + error text */
+    display: flex;
+    flex-direction: column;
+    align-items: center;       /* Centers input box */
+    justify-content: center;
+}
+
+/* Center the label */
+.box label {
+    width: 100%;
+    display: block;
+    margin-bottom: 6px;
+    overflow: hidden;
+    white-space: nowrap;
+    box-sizing: border-box;
+    text-align: left; /* Align left as it scrolls */
+    position: relative;
+    height: 1.2em; /* to prevent layout jump */
+}
+
+/* Flip animation for label text */
+.box label {
+    display: inline-block;
+    perspective: 1000px;
+    overflow: visible;
+    white-space: nowrap;
+    text-align: center;
+    position: relative;
+    height: 1.2em;
+}
+
+.box label::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    backface-visibility: hidden;
+  
+    color: inherit;
+}
+
+@keyframes flipAnimation {
+    0% {
+        transform: rotateX(0deg);
+    }
+    50% {
+        transform: rotateX(180deg);
+    }
+    100% {
+        transform: rotateX(360deg);
+    }
+}
+
+/* Center the input and reduce its width */
+.box input {
+    width: 70%;                /* Adjust size: perfect for grid */
+    max-width: 160px;          /* Prevent too wide inputs */
+    min-width: 110px;          /* Looks balanced on mobile */
+    text-align: center;        /* Center typing text */
+}
+
+/* Center error text */
+.box .error {
+    text-align: center;
+    width: 100%;
+}
+
+/* Center the h4 heading inside container */
+.container h4 {
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-weight: 600;
+    color: white;
+    font-size: 20px;
+}   
+/* ==========================================================
+   🔥 FULLY WORKING FUTURISTIC ANIMATED BACKGROUND
+   ========================================================== */
+
+/* ============================================================
+   FUTURISTIC TECH BACKGROUND (HEXAGON + NEON LINES + GLOW)
+   ============================================================ */
+
+/* All layers behind everything */
+.bg-hex,
+.bg-lines,
+.bg-glow {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -9999;
+    pointer-events: none;
+}
+
+/* ============================
+   1) Floating HEXAGON GRID
+   ============================ */
+.bg-hex {
+    background-image: url("https://i.imgur.com/3S7N6Io.png");
+    background-size: 600px;
+    opacity: 0.18;
+    animation: hexFloat 26s linear infinite;
+}
+
+@keyframes hexFloat {
+    0% { transform: translateY(0) rotate(0); }
+    100% { transform: translateY(-280px) rotate(1deg); }
+}
+
+/* ============================
+   2) SCANNING NEON TECH LINES
+   ============================ */
+/* ============================================================
+   FUTURISTIC TECH BACKGROUND (HEXAGON + NEON LINES + GLOW)
+   ============================================================ */
+
+
+/* ============================
+   1) Floating HEXAGON GRID
+   ============================ */
+/* ============================================================
+   DARK MODE FUTURISTIC BACKGROUND PACK
+   Hexagon + Neon Lines + Glow + Hologram + Grid + Particles
+   ============================================================ */
+
+.bg-hex,
+.bg-lines,
+.bg-glow,
+.bg-holo,
+.bg-matrix,
+.bg-particles-2,
+.bg-grid {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -9999;
+    pointer-events: none;
+}
+
+
+/* ------------------------------------------------------------
+   1) DARK HEXAGON GRID (Deep Blue Glow)
+------------------------------------------------------------ */
+.bg-hex {
+    background-image: url("https://i.imgur.com/3S7N6Io.png");
+    background-size: 550px;
+    opacity: 0.12;  /* darker */
+    filter: brightness(0.6);
+    animation: hexFloat 30s linear infinite;
+}
+
+@keyframes hexFloat {
+    0%   { transform: translateY(0) rotate(0deg); }
+    100% { transform: translateY(-260px) rotate(1deg); }
+}
+
+
+/* ------------------------------------------------------------
+   2) DARK NEON LINES (Cyber Blue)
+------------------------------------------------------------ */
+.bg-lines {
+    background-image: url("https://i.imgur.com/oQ0pLba.png");
+    background-size: cover;
+    opacity: 0.10; /* darker */
+    mix-blend-mode: lighten;
+    filter: brightness(0.7);
+    animation: neonScan 22s linear infinite;
+}
+
+@keyframes neonScan {
+    0%   { transform: translateY(0); }
+    100% { transform: translateY(-200px); }
+}
+
+
+/* ------------------------------------------------------------
+   3) DARK GLOW CLOUD (Deep Blue + Cyan)
+------------------------------------------------------------ */
+.bg-glow {
+    background: radial-gradient(circle at 50% 70%,
+        rgba(0,150,255,0.18),
+        rgba(0,0,20,0.9)
+    );
+    opacity: 0.22;
+    animation: glowPulse 16s ease-in-out infinite alternate;
+}
+
+@keyframes glowPulse {
+    0%   { transform: scale(1); opacity: 0.22; }
+    100% { transform: scale(1.08); opacity: 0.30; }
+}
+
+
+/* ------------------------------------------------------------
+   4) HOLOGRAM WAVE SCAN (Deep Blue Scan Lines)
+------------------------------------------------------------ */
+.bg-holo {
+    background: repeating-linear-gradient(
+        0deg,
+        rgba(0,255,255,0.05) 0px,
+        rgba(0,255,255,0.05) 2px,
+        transparent 2px,
+        transparent 6px
+    );
+    opacity: 0.05;  /* subtle dark */
+    animation: holoWave 6s ease-in-out infinite;
+}
+
+@keyframes holoWave {
+    0%   { transform: translateY(0) skewX(0deg); }
+    50%  { transform: translateY(-12px) skewX(5deg); }
+    100% { transform: translateY(0) skewX(0deg); }
+}
+
+
+/* ------------------------------------------------------------
+   5) DARK MATRIX RAIN (Blue Matrix Drizzle)
+------------------------------------------------------------ */
+.bg-matrix {
+    background-image: url("https://i.imgur.com/VH0M3zj.png");
+    background-size: cover;
+    opacity: 0.12;  /* dark mode tuning */
+    mix-blend-mode: screen;
+    filter: brightness(0.7);
+    animation: matrixRain 14s linear infinite;
+}
+
+@keyframes matrixRain {
+    0%   { transform: translateY(-100%); }
+    100% { transform: translateY(100%); }
+}
+
+
+/* ------------------------------------------------------------
+   6) DARK TECH PARTICLES (Floating Nano Sparks)
+------------------------------------------------------------ */
+.bg-particles-2 {
+    background-image: url("https://i.imgur.com/VG8JpXU.png");
+    background-size: 450px;
+    opacity: 0.22;  
+    animation: floatSparks 18s linear infinite;
+    filter: brightness(0.6);
+}
+
+@keyframes floatSparks {
+    0%   { transform: translate(0,0) scale(1); }
+    100% { transform: translate(-40px,-40px) scale(1.2); }
+}
+
+
+/* ------------------------------------------------------------
+   7) DARK 3D GRID (Tron Style Deep Blue Floor)
+------------------------------------------------------------ */
+.bg-grid {
+    background-image: url("https://i.imgur.com/bVDN5OU.png");
+    background-size: cover;
+    opacity: 0.10;
+    filter: brightness(0.6);
+    animation: gridMove 22s linear infinite;
+}
+
+@keyframes gridMove {
+    0%   { transform: perspective(400px) translateY(0) rotateX(25deg); }
+    100% { transform: perspective(400px) translateY(-70px) rotateX(25deg); }
+}
+
+#tech-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -10;
+    background: radial-gradient(circle at bottom, #00111f, #000814 60%);
+}
+
+/* Placeholder text color white */
+input::placeholder {
+    color: white;
+    opacity: 1; /* Make sure placeholder is visible */
+}
+input::-webkit-input-placeholder {
+    color: white;
+}
+input::-moz-placeholder {
+    color: white;
+}
+input:-ms-input-placeholder {
+    color: white;
+}
+input:-moz-placeholder {
+    color: white;
+}
+
+/* Footer styling */
+footer {
+    width: 100%;
+    padding: 12px 20px;
+    background-color: rgba(0, 18, 45, 0.45);
+    box-shadow: 0 0 18px rgba(0, 120, 255, 0.15);
+    position: relative;
+    text-align: center;
+    color: #e6f1ff;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    font-family: 'Poppins', sans-serif;
+    user-select: none;
+    margin-top: 20px;
+}
